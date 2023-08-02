@@ -1,0 +1,53 @@
+{
+    "id":1,
+    "tienda": "Animagood",
+    "productos": [
+    {
+        "id": 1,
+        "nombre": "Conjunto frio",
+        "precio": 40.00,
+        "stock": 5
+    },
+
+    {
+        "id": 2,
+        "nombre": "Disfraz para halloween",
+        "precio": 70.00,
+        "stock": 9
+    },
+
+    {
+        "id": 3,
+        "nombre": "Sombrero tipo vaquero",
+        "precio": 100.00,
+        "stock": 3
+    },
+    ]
+}
+
+{
+    "id":1,
+    "tienda": "Animagood",
+    "productos": [
+    {
+        "id": 1,
+        "nombre": "Conjunto frio",
+        "precio": 40.00,
+        "stock": 5
+    },
+
+    {
+        "id": 2,
+        "nombre": "Disfraz para halloween",
+        "precio": 70.00,
+        "stock": 9
+    },
+
+    {
+        "id": 3,
+        "nombre": "Sombrero tipo vaquero",
+        "precio": 100.00,
+        "stock": 3
+    },
+    ]
+}

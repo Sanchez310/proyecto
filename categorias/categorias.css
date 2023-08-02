@@ -1,0 +1,24 @@
+body {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  margin: 0;
+  background-color: #f0f0f0; /* Color de fondo, puedes cambiarlo por el color que desees */
+}
+.square {
+  width: 150px;
+  height: 100px; /* Aumentamos la altura para centrar verticalmente el texto */
+  background-color: #B3E5FC;
+  border: 2px solid black;
+  padding: 1px;
+  margin: 10px;
+  display: flex; /* Utilizamos flexbox para centrar verticalmente el contenido */
+  align-items: center; /* Centramos verticalmente el contenido */
+  justify-content: center; /* Centramos horizontalmente el contenido */
+  text-align: center;
+}
+
+.square h3 {
+  margin: 0; /* Quitamos los márgenes del h3 para evitar espacios innecesarios */
+}

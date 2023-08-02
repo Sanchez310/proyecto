@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Iniciar sesión</title>
+  <style>
+    body {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+      margin: 0;
+      background-color: #e5d2c4; /* Color de fondo, puedes cambiarlo por el color que desees */
+    }
+    #login-form {
+      background-color: #ffffff; /* Color de fondo del formulario */
+      padding: 20px;
+      border-radius: 5px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    }
+  </style>
+</head>
+<body>
+  <div id="login-form">
+    <h2>Iniciar sesión</h2>
+    <p>Por favor, llene los siguientes campos</p>
+    <form>
+      <label for="email">Correo electrónico:</label>
+      <br><br>
+      <input type="email" id="email" name="email" required>
+      <br><br>
+      <label for="password">Contraseña:</label>
+      <br><br>
+      <input type="password" id="password" name="password" required>
+      <br><br>
+      <button class="inicio" type="submit">Iniciar sesión</button>
+      <span id="user-account"></span>
+    </form>
+  </div>
+
+  <script>
+    // Obtener referencia al formulario y al elemento donde mostraremos el mensaje de bienvenida
+    const loginForm = document.getElementById('login-form');
+    const userAccount = document.getElementById('user-account');
+
+    // Evento para enviar el formulario
+    const loginFormSubmit = document.querySelector('#login-form form');
+    loginFormSubmit.addEventListener('submit', function(event) {
+      event.preventDefault();
+      const email = document.getElementById('email').value;
+      const password = document.getElementById('password').value;
+      // Aquí puedes realizar las acciones para el inicio de sesión, por ejemplo, enviar los datos al servidor.
+      // Por ahora, solo mostraremos un mensaje con el correo electrónico en el elemento con id "user-account".
+      userAccount.textContent = `¡Bienvenido, ${email}!`;
+
+      // Redirigir a la página principal después de completar el registro
+      window.location.href = "/ruta-de-la-ventana-principal.html";
+    });
+  </script>
+</body>
+</html>
