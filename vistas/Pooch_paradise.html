@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Productos para mascotas</title>
+  <link rel="stylesheet" href="/tiendas.css/pooch_paradice.css">
+</head>
+<body>
+  <h1>Productos para mascotas</h1>
+  <!-- Barra de búsqueda -->
+<div>
+  <input type="text" placeholder="Buscar productos..." id="search-input">
+  <button onclick="searchProducts()">Buscar</button>
+</div>
+
+<div id="product-container" class="product-container">
+  <!-- Productos aquí -->
+</div>
+<script>
+  function searchProducts() {
+    // Obtener el valor ingresado en la barra de búsqueda
+    var searchValue = document.getElementById('search-input').value.toLowerCase();
+
+    // Obtener todos los productos
+    var products = document.getElementsByClassName('product');
+
+    // Recorrer cada producto y ocultar aquellos que no coincidan con el término de búsqueda
+    for (var i = 0; i < products.length; i++) {
+      var product = products[i];
+      var productName = product.querySelector('h2').innerText.toLowerCase();
+
+      if (productName.includes(searchValue)) {
+        product.style.display = 'inline-block';
+      } else {
+        product.style.display = 'none';
+      }
+    }
+  }
+</script>
+
+  
+  <div class="product">
+    <img src="imagen_cuidados.jpg" alt="Productos de cuidado para mascotas">
+    <h2>Productos de cuidado</h2>
+    <p>Encuentra aquí todo lo necesario para mantener a tu mascota sana y feliz.</p>
+    <button>Agregar al carrito</button>
+  </div>
+  
+  <div class="product">
+    <img src="imagen_ropa.jpg" alt="Ropa para mascotas">
+    <h2>Ropa para mascotas</h2>
+    <p>Viste a tu mascota con estilo con nuestra colección de ropa de moda.</p>
+    <button>Agregar al carrito</button>
+  </div>
+  
+  <div class="product">
+    <img src="imagen_alimento.jpg" alt="Alimento para mascotas">
+    <h2>Alimento para mascotas</h2>
+    <p>Una gran selección de alimentos para satisfacer las necesidades nutricionales de tu mascota.</p>
+    <button>Agregar al carrito</button>
+  </div>
+  
+  <div class="product">
+    <img src="imagen_platos.jpg" alt="Platos para mascotas">
+    <h2>Platos para mascotas</h2>
+    <p>Elige entre nuestros platos y comederos de diseño para mantener a tu mascota bien alimentada.</p>
+    <button>Agregar al carrito</button>
+  </div>
+</body>
+</html>

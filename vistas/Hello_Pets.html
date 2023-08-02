@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Productos para mascotas</title>
+  <link rel="stylesheet" href="/tiendas.css/hellop.css">
+  <style>
+    /* Estilos para el carrito */
+    #carrito {
+      margin-top: 20px;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+      padding: 10px;
+    }
+
+    #carrito h2 {
+      text-align: center;
+      margin-bottom: 10px;
+    }
+
+    #carrito .producto {
+      margin-bottom: 5px;
+    }
+
+    #totalCarrito {
+      text-align: right;
+      font-weight: bold;
+    }
+
+    .eliminar-producto {
+      color: red;
+      cursor: pointer;
+    }
+  </style>
+</head>
+<body>
+  <h1>Productos para mascotas</h1>
+  <!-- Barra de búsqueda -->
+  <div>
+    <input type="text" placeholder="Buscar productos..." id="search-input">
+    <button onclick="searchProducts()">Buscar</button>
+  </div>
+
+  <div id="product-container" class="product-container">
+    <!-- Productos aquí -->
+
+    <div class="product">
+      <img src="/imagenespt/cama.jf" alt="">
+      <h2>Cama para perro</h2>
+      <p>Ideal para razas pequeñas
+        Adquiérelo en la promoción de $400.00
+      </p>
+      <button onclick="agregarAlCarrito('Cama para perro', 400.00)">Agregar al carrito</button>
+    </div>
+
+    <div class="product">
+      <img src="/imagenespt/pelota.jpg" alt="">
+      <h2>Pelota Huppy</h2>
+      <p>Pasa un rato divertido con tu perrito, será el juego más divertido para tu cachorro. $13.00 o llévate 4 por $35.00 </p>
+      <button onclick="agregarAlCarrito('Pelota Huppy', 13.00)">Agregar al carrito</button>
+    </div>
+
+    <div class="product">
+      <img src="/imagenespt/suplemento.jfif" alt="">
+      <h2>Dermoplex Suplemento Nutricional</h2>
+      <p>Contiene 30 tabletas.
+        Consíguelo por $315.00
+      </p>
+      <button onclick="agregarAlCarrito('Dermoplex Suplemento Nutricional', 315.00)">Agregar al carrito</button>
+    </div>
+
+    <div class="product">
+      <img src="/imagenespt/tra.webp" alt="">
+      <h2>Transportadora 12 kg</h2>
+      <p>Ideal para llevar a tu pequeño a todos lados.
+        Precio: $590.00
+      </p>
+      <button onclick="agregarAlCarrito('Transportadora 12 kg', 590.00)">Agregar al carrito</button>
+    </div>
+
+    <div class="product">
+      <img src="/imagenespt/placas.jfif" alt="">
+      <h2>Placas personalizables</h2>
+      <p>Evita pérdidas de tus mascotas y protégelos con placas personalizables
+        Precio: $30.00
+      </p>
+      <button onclick="agregarAlCarrito('Placas personalizables', 30.00)">Agregar al carrito</button>
+    </div>
+
+    <div class="product">
+      <img src="/imagenespt/lentes.jfif" alt="">
+      <h2>Lentes</h2>
+      <p>Dale estilo a tu mascota con estos lentes.
+        Colores disponibles: Azul, Negro y Rosa
+        Precio: $200.00
+      </p>
+      <button onclick="agregarAlCarrito('Lentes', 200.00)">Agregar al carrito</button>
+    </div>
+  </div>
+
+  <!-- Carrito de compras -->
+  <div id="carrito" style="display: none;">
+    <h2>Carrito de Compras</h2>
+    <div id="carrito-container"></div>
+    <div class="total" id="totalCarrito">
+      Total a pagar: $0.00
+    </div>
+  </div>
+
+  <script>
+    const carrito = {};
+
+    function agregarAlCarrito(nombre, precio) {
+      if (carrito[nombre]) {
+        carrito[nombre].cantidad++;
+      } else {
+        carrito[nombre] = {
+          precio: precio,
+          cantidad: 1
+        };
+      }
+      actualizarCarrito();
+    }
+
+    function eliminarDelCarrito(nombre) {
+      if (carrito[nombre]) {
+        delete carrito[nombre];
+        actualizarCarrito();
+      }
+    }
+
+    function actualizarCarrito() {
+      const carritoContainer = document.getElementById("carrito-container");
+      carritoContainer.innerHTML = "";
+
+      let total = 0;
+      for (const nombre in carrito) {
+        const producto = carrito[nombre];
+        const precioTotal = producto.precio * producto.cantidad;
+        total += precioTotal;
+
+        const productoDiv = document.createElement("div");
+        productoDiv.className = "producto";
+        productoDiv.innerHTML = `
+          <span class="nombre">${nombre}</span> - Cantidad: ${producto.cantidad} - Precio: $${precioTotal.toFixed(2)}
+          <span class="eliminar-producto" onclick="eliminarDelCarrito('${nombre}')">Eliminar</span>
+        `;
+        carritoContainer.appendChild(productoDiv);
+      }
+
+      const totalCarritoDiv = document.getElementById("totalCarrito");
+      totalCarritoDiv.textContent = `Total a pagar: $${total.toFixed(2)}`;
+
+      // Mostrar u ocultar el carrito según si hay productos o no
+      const carritoDiv = document.getElementById("carrito");
+      if (Object.keys(carrito).length > 0) {
+        carritoDiv.style.display = "block";
+      } else {
+        carritoDiv.style.display = "none";
+      }
+    }
+
+    function searchProducts() {
+      // Obtener el valor ingresado en la barra de búsqueda
+      var searchValue = document.getElementById('search-input').value.toLowerCase();
+
+      // Obtener todos los productos
+      var products = document.getElementsByClassName('product');
+
+      // Recorrer cada producto y ocultar aquellos que no coincidan con el término de búsqueda
+      for (var i = 0; i < products.length; i++) {
+        var product = products[i];
+        var productName = product.querySelector('h2').innerText.toLowerCase();
+
+        if (productName.includes(searchValue)) {
+          product.style.display = 'inline-block';
+        } else {
+          product.style.display = 'none';
+        }
+      }
+    }
+  </script>
+</body>
+</html>

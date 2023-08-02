@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Productos para mascotas</title>
+  <link rel="stylesheet" href="/tiendas.css/animaldog.css">
+  <style>
+    /* Estilos para el carrito */
+    #carrito {
+      margin-top: 20px;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+      padding: 10px;
+    }
+
+    #carrito h2 {
+      text-align: center;
+      margin-bottom: 10px;
+    }
+
+    #carrito .producto {
+      margin-bottom: 5px;
+    }
+
+    #totalCarrito {
+      text-align: right;
+      font-weight: bold;
+    }
+
+    .eliminar-producto {
+      color: red;
+      cursor: pointer;
+    }
+  </style>
+</head>
+<body>
+  <h1>Productos para mascotas</h1>
+  <p>El estilo que tu pequeño necesita</p>
+  
+  <!-- Barra de búsqueda -->
+  <div>
+    <input type="text" placeholder="Buscar productos..." id="search-input">
+    <button onclick="searchProducts()">Buscar</button>
+  </div>
+
+  <div id="product-container" class="product-container">
+    <!-- Productos aquí -->
+  
+    <div class="product">
+      <img src="/imagenespt/sombrero.webp" alt="">
+      <h2>Conjunto frío</h2>
+      <p>Sombrero y paliacate<br>
+      Precio: $40.00</p>
+      <button onclick="agregarAlCarrito('Conjunto frío', 40.00)">Agregar al carrito</button>
+    </div>
+  
+    <div class="product">
+      <img src="/imagenespt/ropa gato.jfif" alt="">
+      <h2>Ropa</h2>
+      <p>Viste a tu mascota con estilo con nuestra colección de ropa de moda. <br>
+          Colores disponibles: Rosa, verde, azul, lila <br>
+          Precio: $80.00
+      </p>
+      <button onclick="agregarAlCarrito('Ropa', 80.00)">Agregar al carrito</button>
+    </div>
+  
+    <div class="product">
+      <img src="/imagenespt/vaq.webp" alt="Alimento para mascotas">
+      <h2>Sombrero tipo vaquero</h2>
+      <p>Disponible en colores rosa, cafe y negro<br>
+      Precio: $100.00 c/u</p>
+      <button onclick="agregarAlCarrito('Sombrero tipo vaquero', 100.00)">Agregar al carrito</button>
+    </div>
+  
+    <div class="product">
+      <img src="/imagenespt/halloween.webp" alt="">
+      <h2>Disfraz para halloween</h2>
+      <p>Color disponible: Negro<br>
+      Precio: $70.00</p>
+      <button onclick="agregarAlCarrito('Disfraz para halloween', 70.00)">Agregar al carrito</button>
+    </div>
+  </div>
+
+  <!-- Carrito de compras -->
+  <div id="carrito" style="display: none;">
+    <h2>Carrito de Compras</h2>
+    <div id="carrito-container"></div>
+    <div class="total" id="totalCarrito">
+      Total a pagar: $0.00
+    </div>
+  </div>
+
+  <script>
+    const carrito = {};
+
+    function agregarAlCarrito(nombre, precio) {
+      if (carrito[nombre]) {
+        carrito[nombre].cantidad++;
+      } else {
+        carrito[nombre] = {
+          precio: precio,
+          cantidad: 1
+        };
+      }
+      actualizarCarrito();
+    }
+
+    function eliminarDelCarrito(nombre) {
+      if (carrito[nombre]) {
+        delete carrito[nombre];
+        actualizarCarrito();
+      }
+    }
+
+    function actualizarCarrito() {
+      const carritoContainer = document.getElementById("carrito-container");
+      carritoContainer.innerHTML = "";
+
+      let total = 0;
+      for (const nombre in carrito) {
+        const producto = carrito[nombre];
+        const precioTotal = producto.precio * producto.cantidad;
+        total += precioTotal;
+
+        const productoDiv = document.createElement("div");
+        productoDiv.className = "producto";
+        productoDiv.innerHTML = `
+          <span class="nombre">${nombre}</span> - Cantidad: ${producto.cantidad} - Precio: $${precioTotal.toFixed(2)}
+          <span class="eliminar-producto" onclick="eliminarDelCarrito('${nombre}')">Eliminar</span>
+        `;
+        carritoContainer.appendChild(productoDiv);
+      }
+
+      const totalCarritoDiv = document.getElementById("totalCarrito");
+      totalCarritoDiv.textContent = `Total a pagar: $${total.toFixed(2)}`;
+
+      // Mostrar u ocultar el carrito según si hay productos o no
+      const carritoDiv = document.getElementById("carrito");
+      if (Object.keys(carrito).length > 0) {
+        carritoDiv.style.display = "block";
+      } else {
+        carritoDiv.style.display = "none";
+      }
+    }
+
+    function searchProducts() {
+      // Obtener el valor ingresado en la barra de búsqueda
+      var searchValue = document.getElementById('search-input').value.toLowerCase();
+
+      // Obtener todos los productos
+      var products = document.getElementsByClassName('product');
+
+      // Recorrer cada producto y ocultar aquellos que no coincidan con el término de búsqueda
+      for (var i = 0; i < products.length; i++) {
+        var product = products[i];
+        var productName = product.querySelector('h2').innerText.toLowerCase();
+
+        if (productName.includes(searchValue)) {
+          product.style.display = 'inline-block';
+        } else {
+          product.style.display = 'none';
+        }
+      }
+    }
+  </script>
+</body>
+
+</html>

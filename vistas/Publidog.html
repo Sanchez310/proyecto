@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Productos de higiene y cuidado para tu mascota</title>
+  <link rel="stylesheet" href="/tiendas.css/publidog.css">
+  <style>
+    /* Estilos para el carrito */
+    #cart-items {
+      list-style: none;
+      padding: 0;
+    }
+
+    #cart-items li {
+      margin-bottom: 5px;
+    }
+
+    #cart-items li::before {
+      content: "🐾 ";
+    }
+  </style>
+</head>
+<body>
+  <h1>Productos de higiene y cuidado de tu mascota</h1>
+  <p> ¡Nada mejor que un rico olor!</p>
+  <!-- Barra de búsqueda -->
+  <div>
+    <input type="text" placeholder="Buscar productos..." id="search-input">
+    <button onclick="searchProducts()">Buscar</button>
+  </div>
+
+  <div id="product-container" class="product-container">
+    <!-- Productos aquí -->
+
+    <div class="product">
+      <img src="/imagenespt/cep.jfif" alt="Productos de cuidado para mascotas">
+      <h2>Cepillo para baño</h2>
+      <p>Conciente a tu perro con un rico baño <br>
+        Precio: $20.00 <br>
+        Material: Plastico
+      </p>
+      <button onclick="addToCart(this)" data-product="Cepillo para baño,20.00">Agregar al carrito</button>
+    </div>
+
+    <div class="product">
+      <img src="/imagenespt/shampoo.jfif" alt="Ropa para mascotas">
+      <h2>Shampoo</h2>
+      <p>Marca: Shim Dog <br>
+        Aroma: Fresas<br>
+        Precio: $80
+      </p>
+      <button onclick="addToCart(this)" data-product="Shampoo,80.00">Agregar al carrito</button>
+    </div>
+
+    <div class="product">
+      <img src="/imagenespt/aromatizante.jfif" alt="Alimento para mascotas">
+      <h2>Aromatizante</h2>
+      <p>Elimina los malos olores de tu peludo. <br>
+        Aroma: Lima <br>
+        Precio: $50
+      </p>
+      <button onclick="addToCart(this)" data-product="Aromatizante,50.00">Agregar al carrito</button>
+    </div>
+
+    <div class="product">
+      <img src="/imagenespt/toalla.jfif" alt="">
+      <h2>Toalla secadora</h2>
+      <p>Material suave que evita daños en la piel de la mascota <br>
+        Precio: $210</p>
+      <button onclick="addToCart(this)" data-product="Toalla secadora,210.00">Agregar al carrito</button>
+    </div>
+
+    <div class="product">
+      <img src="/imagenespt/uña.jfif" alt="">
+      <h2>Cortauñas</h2>
+      <p>Evita que tu mascota se haga daño 
+        Precio: $180
+      </p>
+      <button onclick="addToCart(this)" data-product="Cortauñas,180.00">Agregar al carrito</button>
+    </div>
+
+    <div class="product">
+      <img src="/imagenespt/humedas.jfif" alt="Platos para mascotas">
+      <h2>Toallas Humedas</h2>
+      <p>Aleja la suciedad de tu mascota de manera rápida<br>
+        Precio de oferta: $15</p>
+      <button onclick="addToCart(this)" data-product="Toallas Humedas,15.00">Agregar al carrito</button>
+    </div>
+  </div>
+
+  <!-- Carrito de compras -->
+  <div>
+    <h2>Carrito de compras</h2>
+    <ul id="cart-items">
+      <!-- Aquí se mostrarán los productos agregados al carrito -->
+    </ul>
+  </div>
+
+  <script>
+    const carrito = {};
+
+    function addToCart(button) {
+      // Obtener la información del producto del atributo data-product
+      var productInfo = button.getAttribute("data-product");
+      var [productName, productPrice] = productInfo.split(',');
+
+      // Crear un elemento de lista para el carrito
+      var cartItem = document.createElement("li");
+      cartItem.innerText = productName + " - $" + productPrice;
+
+      // Agregar el producto al carrito
+      var cart = document.getElementById("cart-items");
+      cart.appendChild(cartItem);
+    }
+
+    function searchProducts() {
+      // Obtener el valor ingresado en la barra de búsqueda
+      var searchValue = document.getElementById('search-input').value.toLowerCase();
+
+      // Obtener todos los productos
+      var products = document.getElementsByClassName('product');
+
+      // Recorrer cada producto y ocultar aquellos que no coincidan con el término de búsqueda
+      for (var i = 0; i < products.length; i++) {
+        var product = products[i];
+        var productName = product.querySelector('h2').innerText.toLowerCase();
+
+        if (productName.includes(searchValue)) {
+          product.style.display = 'inline-block';
+        } else {
+          product.style.display = 'none';
+        }
+      }
+    }
+  </script>
+</body>
+</html>

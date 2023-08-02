@@ -1,0 +1,64 @@
+body {
+    font-family: Arial, sans-serif;
+    text-align: center;
+    margin: 20px;
+  }
+  
+  h1 {
+    margin-bottom: 30px;
+  }
+  
+  .product {
+    display: inline-block;
+    width: 300px;
+    border: 1px solid #FF5733;
+    padding: 10px;
+    margin: 10px;
+    border-radius: 5px;
+    box-shadow: 0px 0px 8px rgba(0, 0, 0, 0.2);
+    transition: transform 0.3s;
+  }
+  
+  .product img {
+    width: 100%;
+    height: auto;
+  }
+  
+  .product h2 {
+    margin-top: 10px;
+  }
+  
+  .product p {
+    margin-top: 5px;
+  }
+  
+  .product:hover {
+    transform: scale(1.05);
+  }
+  
+  /* Estilos generales del botón */
+button {
+  background-color: #4CAF50; /* Color de fondo del botón */
+  color: white; /* Color del texto del botón */
+  padding: 10px 20px; 
+  border: none; /* Quitamos el borde del botón */
+  border-radius: 5px; /* Radio de los bordes del botón para que tenga esquinas redondeadas */
+  cursor: pointer; 
+  font-size: 16px; /* Tamaño del texto del botón */
+}
+
+/* Estilos cuando el cursor está sobre el botón */
+button:hover {
+  background-color: #45a049; /* Color de fondo cuando el cursor está sobre el botón */
+}
+
+/* Estilos cuando el botón está presionado/click */
+button:active {
+  background-color: #3e8e41; /* Color de fondo cuando el botón está presionado */
+}
+
+/* Estilos cuando el botón está deshabilitado */
+button:disabled {
+  opacity: 0.6; /* Opacidad reducida para el botón deshabilitado */
+  cursor: not-allowed; /* Cambia el cursor cuando el botón está deshabilitado */
+}
